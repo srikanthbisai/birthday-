@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081b33">
+  <meta name="description" content="A quiet birthday evening by the sea for Marniè.">
+  <title>Happy Birthday, Marniè</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Dancing+Script:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#experience">Skip to the experience</a>
+
+  <div class="loader" id="loader" aria-live="polite">
+    <div class="loader-moon" aria-hidden="true"></div>
+    <p>For Marniè</p>
+    <span>A quiet evening is waiting by the sea</span>
+    <div class="loader-line"><i></i></div>
+  </div>
+
+  <div class="world day" id="world" aria-hidden="true">
+    <div class="sky sky-day"></div>
+    <div class="sky sky-sunset"></div>
+    <div class="sky sky-night"></div>
+    <canvas id="starsCanvas"></canvas>
+    <div class="clouds">
+      <i class="cloud cloud-a"></i><i class="cloud cloud-b"></i><i class="cloud cloud-c"></i>
+    </div>
+    <div class="birds"><i></i><i></i><i></i></div>
+    <div class="sun"></div>
+    <button class="moon" id="moon" type="button" tabindex="-1" aria-label="Show a moon memory"></button>
+    <div class="moon-note" id="moonNote" role="status"></div>
+    <div class="horizon-glow"></div>
+    <div class="ocean">
+      <div class="moon-road"></div>
+      <div class="water-glints"></div>
+      <div class="wave wave-back"></div>
+      <div class="wave wave-mid"></div>
+      <div class="wave wave-front"></div>
+    </div>
+    <div class="shore"></div>
+    <div class="palm palm-left"><span></span></div>
+    <div class="palm palm-right"><span></span></div>
+  </div>
+
+  <button class="back-button" id="backButton" type="button" hidden aria-label="Go to previous scene">
+    <span class="back-icon">←</span><span class="back-label">back</span>
+  </button>
+  <button class="music-button" id="musicButton" type="button" aria-label="Turn music on" aria-pressed="false">
+    <span class="music-icon">♫</span><span class="music-label">music off</span>
+  </button>
+  <audio id="music" src="assets/music/jhol.mp3" loop autoplay playsinline preload="auto"></audio>
+  <audio id="waves" src="assets/music/waves.mp3" loop preload="auto"></audio>
+
+  <div class="progress" aria-label="Story progress"><i id="progressBar"></i></div>
+
+  <main id="experience">
+    <section class="scene active" id="arrival" data-theme="day" aria-labelledby="arrivalTitle">
+      <div class="scene-count">01 &nbsp;·&nbsp; Arrival</div>
+      <div class="bottle-journey" id="bottleJourney">
+        <div class="bottle-wrap">
+          <div class="bottle">
+            <div class="cork"></div><div class="glass-neck"></div><div class="glass-body"><i></i></div>
+          </div>
+          <div class="bottle-tag">For Marniè <span>🌊</span></div>
+        </div>
+      </div>
+      <div class="arrival-copy">
+        <p class="eyebrow">A bottle washes ashore</p>
+        <h1 id="arrivalTitle">Happy Birthday, <em>Marniè</em></h1>
+        <p>For Marniè 🌊💌</p>
+        <div class="arrival-actions" id="arrivalActions">
+          <button class="glass-button primary" id="openBottle" type="button" disabled>
+            Open Your Birthday Surprise
+          </button>
+          <button class="glass-button ghost" id="noThanks" type="button" disabled>No thanks</button>
+        </div>
+        <div class="cute-bubble" id="cuteBubble" role="status"></div>
+      </div>
+    </section>
+
+    <section class="scene" id="letter" data-theme="day" aria-labelledby="letterTitle" hidden>
+      <div class="scene-count">02 &nbsp;·&nbsp; A letter</div>
+      <article class="parchment">
+        <div class="wax-seal" aria-hidden="true">M</div>
+        <p class="eyebrow dark">A note carried by the tide</p>
+        <h2 id="letterTitle">Happy Birthday, Marniè</h2>
+        <div class="letter-copy" id="letterCopy" aria-live="polite"></div>
+        <p class="signature" id="signature">— Aelius</p>
+      </article>
+      <button class="glass-button next-button" data-next="memories" type="button" disabled>Continue <span>→</span></button>
+    </section>
+
+    <section class="scene" id="memories" data-theme="day" aria-labelledby="memoriesTitle" hidden>
+      <div class="scene-count">03 &nbsp;·&nbsp; Memories</div>
+      <header class="scene-header">
+        <p class="eyebrow">Memories in motion</p>
+        <h2 id="memoriesTitle">Three little moments <span>✨</span></h2>
+      </header>
+      <div class="polaroids">
+        <figure class="polaroid">
+          <div class="photo-shell"><img src="assets/photos/photo1.jpg" alt="Marniè in a red dress" loading="lazy"><span>01</span></div>
+          <figcaption>Loved these moments ✨</figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="photo-shell"><img src="assets/photos/photo2.jpg" alt="Marniè at the podium" loading="lazy"><span>02</span></div>
+          <figcaption>Some moments just stay with you.</figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="photo-shell"><img src="assets/photos/photo3.jpg" alt="Aelius and Marniè racing a scooter at night" loading="lazy"><span>03</span></div>
+          <figcaption>The little things I’d keep forever.</figcaption>
+        </figure>
+      </div>
+      <button class="glass-button next-button" data-next="bottles" type="button">Continue <span>→</span></button>
+    </section>
+
+    <section class="scene" id="bottles" data-theme="day" aria-labelledby="bottlesTitle" hidden>
+      <div class="scene-count">04 &nbsp;·&nbsp; Messages in bottles</div>
+      <header class="scene-header">
+        <p class="eyebrow">Messages in bottles</p>
+        <h2 id="bottlesTitle">Click Each Bottle</h2>
+      </header>
+      <div class="bottle-row" id="bottleRow"></div>
+      <div class="obj-msg" id="bottleMsg" role="status"></div>
+      <button class="glass-button next-button" data-next="walk" type="button">Continue <span>→</span></button>
+    </section>
+
+    <section class="scene" id="walk" data-theme="day" aria-labelledby="walkTitle" hidden>
+      <div class="scene-count">05 &nbsp;·&nbsp; Beach walk</div>
+      <header class="scene-header compact">
+        <p class="eyebrow">Beach walk</p>
+        <h2 id="walkTitle">Little Things That Remind Me of You</h2>
+        <p>No pages, no rounds, no duty calls — just sand between your toes and a few minutes that are only yours.</p>
+        <p class="tap-instruction">Tap each icon to uncover what it's hiding.</p>
+      </header>
+      <div class="treasure-beach" id="treasureBeach">
+        <button class="treasure shell" type="button" data-message="Thank you for always making time for me." aria-label="Shell">◒</button>
+        <button class="treasure starfish" type="button" data-message="You're genuinely one of my favorite people." aria-label="Starfish">★</button>
+        <button class="treasure crab" type="button" data-message="Even this crab thinks you're awesome." aria-label="Crab">🦀</button>
+        <button class="treasure tiny-bottle" type="button" data-message="I'm proud of how far you've come." aria-label="Bottle">♧</button>
+        <button class="treasure coconut" type="button" data-message="I hope this year brings you countless reasons to smile." aria-label="Coconut">●</button>
+        <button class="treasure stethoscope" type="button" data-message="Keep becoming the amazing doctor you're meant to be." aria-label="Stethoscope">♧</button>
+        <div class="discovery" id="discovery" role="status"></div>
+      </div>
+      <div class="found"><span id="foundCount">0</span> of 6 thoughts found</div>
+      <button class="glass-button next-button" data-next="golden" type="button">Follow the sunset <span>→</span></button>
+    </section>
+
+    <section class="scene" id="golden" data-theme="sunset" aria-labelledby="goldenTitle" hidden>
+      <div class="scene-count">06 &nbsp;·&nbsp; Golden hour</div>
+      <header class="scene-header">
+        <p class="eyebrow">As the light turns gold</p>
+        <h2 id="goldenTitle">Before This Day Ends</h2>
+      </header>
+      <div class="wishes">
+        <p>Thank you for always making time for me.</p>
+        <p>Never stop believing in yourself.</p>
+        <p>Keep smiling—even on the difficult days.</p>
+        <p>You're becoming someone many people will look up to.</p>
+        <p>I hope this year is kinder to you.</p>
+        <p>I hope you always find reasons to laugh.</p>
+      </div>
+      <button class="glass-button next-button" data-next="night" type="button">Stay until moonrise <span>→</span></button>
+    </section>
+
+    <section class="scene" id="night" data-theme="night" aria-labelledby="nightTitle" hidden>
+      <div class="scene-count">07 &nbsp;·&nbsp; Night</div>
+      <div class="night-copy">
+        <p class="eyebrow">Our familiar tradition</p>
+        <h2 id="nightTitle">Under The Same Moon</h2>
+        <p>Touch the moon. Catch a falling star.</p>
+      </div>
+      <div class="shooting-stars" id="shootingStars"></div>
+      <button class="glass-button next-button" data-next="cake" type="button">One last wish <span>→</span></button>
+    </section>
+
+    <section class="scene" id="cake" data-theme="night" aria-labelledby="cakeTitle" hidden>
+      <div class="scene-count">08 &nbsp;·&nbsp; A wish</div>
+      <header class="scene-header">
+        <p class="eyebrow">Close your eyes</p>
+        <h2 id="cakeTitle">Make A Birthday Wish</h2>
+      </header>
+      <div class="cake" aria-label="Birthday cake with three lit candles">
+        <div class="candles">
+          <i><b></b></i><i><b></b></i><i><b></b></i>
+        </div>
+        <div class="cake-icing"></div><div class="cake-layer"></div><div class="cake-plate"></div>
+      </div>
+      <p class="wish-hint">Some wishes are too beautiful to say out loud.</p>
+      <button class="glass-button primary" id="blowCandles" type="button">Blow out the candles</button>
+    </section>
+
+    <section class="scene finale" id="finale" data-theme="night" aria-labelledby="finaleTitle" hidden>
+      <canvas id="fireworksCanvas" aria-hidden="true"></canvas>
+      <div class="final-content">
+        <div class="final-photo-wrap">
+          <img src="assets/photos/final.jpg" alt="Aelius and Marniè together" loading="lazy">
+          <span>Together, under the same sky</span>
+        </div>
+        <div class="final-message">
+          <p class="eyebrow">09 &nbsp;·&nbsp; For Marniè</p>
+          <h2 id="finaleTitle">Happy Birthday</h2>
+          <div id="finalLines">
+            <p>Thank you for being such an amazing person.</p>
+            <p>Thank you for every conversation.</p>
+            <p>Thank you for every moon picture.</p>
+            <p>Thank you for being part of my routine.</p>
+            <p>Some traditions are worth keeping.</p>
+            <p>Ours is sending each other the moon. <span>🌙</span></p>
+            <p class="final-words">See you under the next beautiful moon.</p>
+            <p class="signature">— Aelius</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
