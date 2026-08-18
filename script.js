@@ -363,12 +363,10 @@ $("#blowCandles").addEventListener("click", event => {
 
 function markImageMissing(image) {
   image.classList.add("missing");
-  image.closest(".polaroid")?.remove();
 }
 
 $$("img").forEach(image => {
   image.addEventListener("error", () => markImageMissing(image));
-  if (image.complete && image.naturalWidth === 0) markImageMissing(image);
 });
 
 const starsCanvas = $("#starsCanvas");
