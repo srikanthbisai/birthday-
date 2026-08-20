@@ -38,10 +38,12 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--stars); outline
 .sky-day { background: linear-gradient(#69bde9 0%, #b9e2ee 57%, #f7d9a0 100%); }
 .sky-sunset { background: linear-gradient(#4e86bf 0%, #e68a82 45%, #fdba74 76%, #b96575 100%); }
 .sky-night { background: radial-gradient(ellipse at 70% 10%, #183d62 0%, #0c2847 35%, var(--night) 75%); }
-.world.day .sky-day, .world.sunset .sky-sunset, .world.night .sky-night { opacity: 1; }
+.sky-storm { background: linear-gradient(#0a1224 0%, #152238 42%, #1b2a3d 70%, #243447 100%); }
+.world.day .sky-day, .world.sunset .sky-sunset, .world.night .sky-night, .world.storm .sky-storm { opacity: 1; }
 
 #starsCanvas { position: absolute; inset: 0; width: 100%; height: 72%; opacity: 0; transition: opacity 2.5s ease; }
 .world.night #starsCanvas { opacity: 1; }
+.world.storm #starsCanvas { opacity: .18; }
 .clouds { opacity: .78; transition: opacity 2s; }
 .cloud { position: absolute; width: 140px; height: 27px; border-radius: 50%; background: rgba(255,255,255,.58); filter: blur(1px); animation: drift linear infinite; }
 .cloud::before, .cloud::after { content: ""; position: absolute; bottom: 4px; border-radius: 50%; background: inherit; }
@@ -50,49 +52,177 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--stars); outline
 .cloud-a { top: 12%; left: -170px; animation-duration: 75s; }
 .cloud-b { top: 24%; left: -180px; transform: scale(.65); animation-duration: 105s; animation-delay: -34s; opacity: .65; }
 .cloud-c { top: 7%; left: -180px; transform: scale(.8); animation-duration: 92s; animation-delay: -60s; }
+.cloud-d { top: 18%; left: -200px; transform: scale(.9); animation-duration: 88s; animation-delay: -12s; opacity: .7; }
+.cloud-e { top: 30%; left: -160px; transform: scale(.55); animation-duration: 110s; animation-delay: -48s; opacity: .5; }
+.cloud-f { top: 4%; left: -220px; transform: scale(1.1); animation-duration: 98s; animation-delay: -72s; opacity: .75; }
+.storm-cloud {
+  display: none; width: 220px; height: 42px;
+  background: rgba(78, 92, 112, .78);
+  filter: blur(2px);
+}
+.storm-cloud::before { width: 88px; height: 78px; left: 34px; }
+.storm-cloud::after { width: 72px; height: 64px; right: 28px; }
+.storm-1 { top: 8%; animation-duration: 55s; animation-delay: -8s; }
+.storm-2 { top: 16%; transform: scale(1.25); animation-duration: 68s; animation-delay: -22s; opacity: .85; }
+.storm-3 { top: 3%; transform: scale(.95); animation-duration: 72s; animation-delay: -40s; opacity: .7; }
+.storm-4 { top: 22%; transform: scale(1.4); animation-duration: 60s; animation-delay: -15s; opacity: .8; }
 @keyframes drift { to { translate: calc(100vw + 360px); } }
 .world.night .clouds { opacity: .12; }
+.world.storm .clouds { opacity: .95; }
+.world.storm .storm-cloud { display: block; }
+.world.storm .cloud:not(.storm-cloud) { background: rgba(120,135,155,.55); opacity: .55; }
 .birds i { position: absolute; left: -10vw; top: 25%; width: 12px; height: 6px; border: solid rgba(20,50,70,.55); border-width: 2px 2px 0 0; border-radius: 50%; animation: fly 38s linear infinite; }
 .birds i:nth-child(2) { top: 31%; animation-delay: -14s; animation-duration: 46s; }
 .birds i:nth-child(3) { top: 18%; animation-delay: -28s; animation-duration: 52s; }
 @keyframes fly { 50% { transform: translate(55vw, -25px); } to { transform: translate(115vw, 8px); } }
-.world.night .birds { opacity: 0; }
+.world.night .birds,
+.world.storm .birds { opacity: 0; }
 
 .sun { position: absolute; top: 15%; right: 13%; width: 76px; aspect-ratio: 1; border-radius: 50%; background: #fff5cc; box-shadow: 0 0 55px rgba(255,235,173,.8); transition: translate 12s ease, opacity 2s; }
 .world.sunset .sun { translate: -8vw 34vh; background: #ffd19b; box-shadow: 0 0 80px rgba(255,159,109,.85); }
-.world.night .sun { opacity: 0; }
+.world.night .sun,
+.world.storm .sun { opacity: 0; }
 .moon { position: absolute; z-index: 3; top: 9%; right: 14%; width: clamp(60px, 8vw, 100px); aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; opacity: 0; pointer-events: none; background: radial-gradient(circle at 38% 35%, #fffdf3, var(--moon) 72%); box-shadow: 0 0 24px rgba(255,248,231,.5), 0 0 80px rgba(255,248,231,.2); cursor: pointer; transition: opacity 2.5s, transform .5s, box-shadow .5s; animation: moonPulse 5s ease-in-out infinite; }
 .moon::before, .moon::after { content: ""; position: absolute; border-radius: 50%; background: rgba(214,207,188,.13); }
 .moon::before { width: 18%; height: 18%; left: 25%; top: 26%; }
 .moon::after { width: 27%; height: 27%; right: 18%; bottom: 20%; }
 .world.night .moon { opacity: 1; pointer-events: auto; }
+.world.storm .moon { opacity: .35; filter: brightness(.7); }
 .moon.touched { transform: scale(1.08); box-shadow: 0 0 40px rgba(255,248,231,.85), 0 0 130px rgba(255,248,231,.3); }
 @keyframes moonPulse { 50% { box-shadow: 0 0 38px rgba(255,248,231,.65), 0 0 100px rgba(255,248,231,.25); } }
 .moon-note { position: absolute; z-index: 5; top: 22%; right: 7%; width: min(300px, 76vw); padding: 1rem 1.2rem; border: 1px solid rgba(255,255,255,.2); border-radius: 14px; opacity: 0; transform: translateY(8px); background: rgba(8,27,51,.44); backdrop-filter: blur(14px); color: var(--moon); font: italic 1.1rem/1.45 var(--serif); text-align: center; pointer-events: none; transition: .5s ease; }
 .moon-note.show { opacity: 1; transform: none; }
 
+.lightning {
+  position: absolute; inset: 0; z-index: 4; opacity: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 60% 18%, rgba(220,235,255,.55), rgba(180,200,255,.12) 35%, transparent 65%);
+  mix-blend-mode: screen;
+}
+.lightning.flash { animation: lightningFlash .55s ease-out; }
+@keyframes lightningFlash {
+  0% { opacity: 0; }
+  8% { opacity: .95; }
+  16% { opacity: .15; }
+  28% { opacity: .8; }
+  42% { opacity: .1; }
+  55% { opacity: .45; }
+  100% { opacity: 0; }
+}
+.rain {
+  position: absolute; inset: 0; z-index: 5; display: none; overflow: hidden; pointer-events: none;
+}
+.world.storm .rain { display: block; }
+.raindrop {
+  position: absolute; top: -12%; width: 1px; border-radius: 999px;
+  background: linear-gradient(to bottom, transparent, rgba(210,228,245,.55));
+  animation: dropFall linear infinite;
+  opacity: .55;
+}
+@keyframes dropFall {
+  to { transform: translateY(115vh); }
+}
+
 .horizon-glow { position: absolute; left: 0; right: 0; top: 62%; height: 13%; opacity: 0; background: linear-gradient(transparent, rgba(255,203,156,.38), transparent); transition: opacity 2s; }
 .world.sunset .horizon-glow { opacity: 1; }
-.ocean { position: absolute; left: 0; right: 0; bottom: 14%; height: 28%; overflow: hidden; background: linear-gradient(#2588c2, #1565a1 75%, #174f81); transition: background 2.5s; }
-.world.sunset .ocean { background: linear-gradient(#b8727b, #bf7974 25%, #396b91 80%); }
-.world.night .ocean { background: linear-gradient(#102f50, #0a243f 80%); }
-.water-glints { position: absolute; inset: 0; opacity: .45; background-image: radial-gradient(ellipse, rgba(255,255,255,.65) 0 11%, transparent 12%); background-size: 95px 13px; animation: glimmer 5s ease-in-out infinite alternate; }
-@keyframes glimmer { to { translate: 28px; opacity: .2; } }
-.moon-road { position: absolute; left: 62%; top: 0; width: 22%; height: 100%; opacity: 0; background: linear-gradient(90deg, transparent, rgba(255,248,231,.2), transparent); clip-path: polygon(42% 0,58% 0,100% 100%,0 100%); transition: opacity 2s; }
+.ocean {
+  position: absolute; left: 0; right: 0; bottom: 14%; height: 30%;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2a8bc8 0%, #1a6fad 40%, #145a92 78%, #1f6a8f 100%);
+  transition: background 2.5s;
+}
+.world.sunset .ocean {
+  background: linear-gradient(180deg, #c4787d 0%, #b06d78 35%, #4a7394 100%);
+}
+.world.night .ocean {
+  background: linear-gradient(180deg, #163a5c 0%, #0f2b48 45%, #0a1f36 100%);
+}
+.world.storm .ocean {
+  background: linear-gradient(180deg, #2a415c 0%, #1a2f46 35%, #102033 75%, #0c1828 100%);
+}
+.sea-depth {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 40% at 50% 0%, rgba(255,255,255,.14), transparent 60%),
+    linear-gradient(180deg, transparent 0%, rgba(0,20,40,.18) 100%);
+  pointer-events: none;
+}
+.moon-road {
+  position: absolute; left: 62%; top: 0; width: 22%; height: 100%; opacity: 0; z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(255,248,231,.2), transparent);
+  clip-path: polygon(42% 0,58% 0,100% 100%,0 100%);
+  transition: opacity 2s;
+}
 .world.night .moon-road { opacity: 1; }
-.wave { position: absolute; left: -10%; width: 120%; height: 34px; border-top: 2px solid rgba(255,255,255,.45); border-radius: 50%; animation: waves 7s ease-in-out infinite alternate; }
-.wave-back { top: 18%; opacity: .35; }
-.wave-mid { top: 48%; animation-delay: -2.5s; opacity: .5; }
-.wave-front { top: 78%; animation-delay: -4s; }
-@keyframes waves { to { transform: translateX(4%) scaleY(1.4); } }
+.world.storm .moon-road { opacity: 0; }
+.tide {
+  position: absolute; left: -8%; width: 116%; height: 70%;
+  fill: rgba(255,255,255,.16);
+  pointer-events: none;
+  will-change: transform;
+}
+.tide-far {
+  top: -6%; height: 52%; fill: rgba(210,235,255,.2);
+  animation: tideIn 14s linear infinite;
+}
+.tide-mid {
+  top: 10%; height: 58%; fill: rgba(230,245,255,.24);
+  animation: tideIn 11.5s linear infinite;
+  animation-delay: -4s;
+}
+.tide-near {
+  top: 28%; height: 72%; fill: rgba(255,255,255,.3);
+  animation: tideIn 9s linear infinite;
+  animation-delay: -2s;
+  filter: drop-shadow(0 -1px 2px rgba(255,255,255,.12));
+}
+.world.night .tide-far { fill: rgba(140,175,210,.16); }
+.world.night .tide-mid { fill: rgba(160,195,225,.2); }
+.world.night .tide-near { fill: rgba(190,215,240,.24); }
+.world.storm .tide-far { fill: rgba(150,175,200,.16); animation-duration: 10s; }
+.world.storm .tide-mid { fill: rgba(170,195,215,.2); animation-duration: 8.5s; }
+.world.storm .tide-near { fill: rgba(200,220,235,.26); animation-duration: 7s; }
+@keyframes tideIn {
+  0% { transform: translate3d(0, 0, 0) scaleY(.88); opacity: .55; }
+  20% { transform: translate3d(-1.5%, 8%, 0) scaleY(.94); opacity: .7; }
+  45% { transform: translate3d(1%, 18%, 0) scaleY(1.02); opacity: .85; }
+  70% { transform: translate3d(-2%, 30%, 0) scaleY(1.08); opacity: .75; }
+  100% { transform: translate3d(1.5%, 42%, 0) scaleY(1.14); opacity: .4; }
+}
+.shore-wash {
+  position: absolute; left: 0; right: 0; bottom: -2%; height: 34%; z-index: 1;
+  background:
+    radial-gradient(ellipse 55% 70% at 20% 100%, rgba(255,255,255,.28), transparent 70%),
+    radial-gradient(ellipse 50% 65% at 55% 100%, rgba(255,255,255,.22), transparent 70%),
+    radial-gradient(ellipse 58% 72% at 85% 100%, rgba(255,255,255,.26), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(255,255,255,.2));
+  animation: washUp 6.5s linear infinite;
+  pointer-events: none;
+}
+.world.storm .shore-wash {
+  background:
+    radial-gradient(ellipse 55% 70% at 20% 100%, rgba(210,225,240,.3), transparent 70%),
+    radial-gradient(ellipse 50% 65% at 55% 100%, rgba(210,225,240,.24), transparent 70%),
+    radial-gradient(ellipse 58% 72% at 85% 100%, rgba(210,225,240,.28), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(200,220,235,.22));
+  animation-duration: 5s;
+}
+@keyframes washUp {
+  0% { transform: translateY(22%) scaleY(.8); opacity: .2; }
+  35% { transform: translateY(8%) scaleY(.95); opacity: .55; }
+  55% { transform: translateY(0) scaleY(1.05); opacity: .9; }
+  100% { transform: translateY(18%) scaleY(.85); opacity: .25; }
+}
 .shore { position: absolute; inset: auto 0 0; height: 17%; background: linear-gradient(#ecd095, var(--sand)); box-shadow: 0 -7px 18px rgba(255,255,255,.28); transition: filter 2s; }
-.world.night .shore { filter: brightness(.29) saturate(.7); }
+.world.night .shore,
+.world.storm .shore { filter: brightness(.29) saturate(.7); }
 .palm { position: absolute; z-index: 1; bottom: 14%; width: 8px; height: 160px; border-radius: 80% 20%; background: #2c4a3b; transform-origin: bottom; animation: sway 6s ease-in-out infinite; }
 .palm::before { content: ""; position: absolute; left: -47px; top: -39px; width: 104px; height: 72px; background: #2f684b; clip-path: polygon(50% 54%,0 9%,42% 44%,30% 0,49% 42%,61% 0,57% 44%,100% 15%,64% 55%,97% 72%,58% 61%,47% 100%,45% 61%,4% 85%,37% 56%); }
 .palm-left { left: 4%; rotate: -7deg; }
 .palm-right { right: 4%; rotate: 8deg; transform: scaleX(-1); }
 @keyframes sway { 50% { rotate: 2deg; } }
-.world.night .palm { filter: brightness(.25); }
+.world.night .palm,
+.world.storm .palm { filter: brightness(.25); }
+.world.storm .palm { animation-duration: 2.8s; }
 
 .music-button,
 .back-button {
@@ -140,8 +270,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--stars); outline
 .glass-button:disabled { opacity: .35; cursor: wait; }
 .glass-button.primary { background: rgba(255,255,255,.18); box-shadow: 0 10px 35px rgba(10,70,110,.18), inset 0 1px rgba(255,255,255,.2); }
 
-#arrival { justify-content: flex-end; padding-bottom: 9vh; }
-.arrival-copy { position: relative; z-index: 4; max-width: 760px; text-align: center; }
+#arrival { justify-content: center; padding-bottom: 0; }
+.arrival-copy { position: relative; z-index: 4; max-width: 760px; text-align: center; transform: translateY(-12vh); }
 .arrival-copy > p:not(.eyebrow) { margin: 1rem auto 0; color: rgba(255,255,255,.85); font: italic clamp(1rem, 2vw, 1.25rem) var(--serif); }
 .arrival-copy .glass-button { margin-top: 0; opacity: 0; transform: translateY(10px); }
 .arrival-copy .glass-button.ready { opacity: 1; transform: none; transition: .8s ease; }
@@ -225,7 +355,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--stars); outline
   background: #f7f3e9; box-shadow: 0 14px 35px rgba(17,60,80,.22); color: #4e463d;
   transform: scale(.97);
   filter: blur(3px);
-  transition: opacity 1.25s ease, transform 1.25s cubic-bezier(.22,.7,.25,1), filter 1.25s ease;
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,.7,.25,1), filter .6s ease;
 }
 .polaroid.current {
   z-index: 2; opacity: 1; pointer-events: auto; filter: none;
@@ -386,4 +516,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--stars); outline
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .bottle-journey { opacity: 1; transform: none; }
+  .rain { display: none !important; }
+  .lightning { display: none !important; }
 }

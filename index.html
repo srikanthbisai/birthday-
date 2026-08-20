@@ -21,25 +21,44 @@
     <div class="loader-line"><i></i></div>
   </div>
 
-  <div class="world day" id="world" aria-hidden="true">
+  <div class="world storm" id="world" aria-hidden="true">
     <div class="sky sky-day"></div>
     <div class="sky sky-sunset"></div>
     <div class="sky sky-night"></div>
+    <div class="sky sky-storm"></div>
     <canvas id="starsCanvas"></canvas>
     <div class="clouds">
-      <i class="cloud cloud-a"></i><i class="cloud cloud-b"></i><i class="cloud cloud-c"></i>
+      <i class="cloud cloud-a"></i>
+      <i class="cloud cloud-b"></i>
+      <i class="cloud cloud-c"></i>
+      <i class="cloud cloud-d"></i>
+      <i class="cloud cloud-e"></i>
+      <i class="cloud cloud-f"></i>
+      <i class="cloud storm-cloud storm-1"></i>
+      <i class="cloud storm-cloud storm-2"></i>
+      <i class="cloud storm-cloud storm-3"></i>
+      <i class="cloud storm-cloud storm-4"></i>
     </div>
     <div class="birds"><i></i><i></i><i></i></div>
     <div class="sun"></div>
     <button class="moon" id="moon" type="button" tabindex="-1" aria-label="Show a moon memory"></button>
     <div class="moon-note" id="moonNote" role="status"></div>
+    <div class="lightning" id="lightning" aria-hidden="true"></div>
+    <div class="rain" id="rain" aria-hidden="true"></div>
     <div class="horizon-glow"></div>
     <div class="ocean">
       <div class="moon-road"></div>
-      <div class="water-glints"></div>
-      <div class="wave wave-back"></div>
-      <div class="wave wave-mid"></div>
-      <div class="wave wave-front"></div>
+      <div class="sea-depth"></div>
+      <svg class="tide tide-far" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,70 C180,40 320,95 520,70 C720,45 880,95 1080,68 C1240,48 1360,82 1440,60 L1440,120 L0,120 Z"></path>
+      </svg>
+      <svg class="tide tide-mid" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,62 C160,90 340,35 540,68 C740,100 920,40 1120,70 C1280,90 1360,55 1440,72 L1440,120 L0,120 Z"></path>
+      </svg>
+      <svg class="tide tide-near" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,78 C200,50 380,105 580,72 C780,40 980,100 1180,70 C1300,55 1380,88 1440,75 L1440,120 L0,120 Z"></path>
+      </svg>
+      <div class="shore-wash"></div>
     </div>
     <div class="shore"></div>
     <div class="palm palm-left"><span></span></div>
@@ -58,7 +77,7 @@
   <div class="progress" aria-label="Story progress"><i id="progressBar"></i></div>
 
   <main id="experience">
-    <section class="scene active" id="arrival" data-theme="day" aria-labelledby="arrivalTitle">
+    <section class="scene active" id="arrival" data-theme="storm" aria-labelledby="arrivalTitle">
       <div class="scene-count">01 &nbsp;·&nbsp; Arrival</div>
       <div class="bottle-journey" id="bottleJourney">
         <div class="bottle-wrap">
@@ -82,8 +101,8 @@
       </div>
     </section>
 
-    <section class="scene" id="letter" data-theme="day" aria-labelledby="letterTitle" hidden>
-      <div class="scene-count">02 &nbsp;·&nbsp; A letter</div>
+    <section class="scene" id="letter" data-theme="night" aria-labelledby="letterTitle" hidden>
+      <div class="scene-count">09 &nbsp;·&nbsp; A letter</div>
       <article class="parchment">
         <div class="wax-seal" aria-hidden="true">M</div>
         <p class="eyebrow dark">A note carried by the tide</p>
@@ -91,7 +110,7 @@
         <div class="letter-copy" id="letterCopy" aria-live="polite"></div>
         <p class="signature" id="signature">— Aelius</p>
       </article>
-      <button class="glass-button next-button" data-next="memories" type="button" disabled>Continue <span>→</span></button>
+      <button class="glass-button next-button" data-next="finale" type="button" disabled>Continue <span>→</span></button>
     </section>
 
     <section class="scene" id="memories" data-theme="day" aria-labelledby="memoriesTitle" hidden>
@@ -122,21 +141,21 @@
           <figcaption>Small gifts. Soft evenings. Big memories.</figcaption>
         </figure>
       </div>
-      <button class="glass-button next-button" data-next="timeline" type="button">Continue <span>→</span></button>
+      <button class="glass-button next-button" data-next="bottles" type="button">Continue <span>→</span></button>
     </section>
 
     <section class="scene" id="timeline" data-theme="day" aria-labelledby="timelineTitle" hidden>
-      <div class="scene-count">04 &nbsp;·&nbsp; Our little timeline</div>
+      <div class="scene-count">02 &nbsp;·&nbsp; Our little timeline</div>
       <header class="scene-header">
         <p class="eyebrow">Our little timeline</p>
         <h2 id="timelineTitle">How we got here</h2>
       </header>
       <div class="reveal-stack" id="timelineStack" aria-live="polite"></div>
-      <button class="glass-button next-button" data-next="bottles" type="button" disabled>Continue <span>→</span></button>
+      <button class="glass-button next-button" data-next="memories" type="button" disabled>Continue <span>→</span></button>
     </section>
 
     <section class="scene" id="bottles" data-theme="day" aria-labelledby="bottlesTitle" hidden>
-      <div class="scene-count">05 &nbsp;·&nbsp; Messages in bottles</div>
+      <div class="scene-count">04 &nbsp;·&nbsp; Messages in bottles</div>
       <header class="scene-header">
         <p class="eyebrow">Messages in bottles</p>
         <h2 id="bottlesTitle">Click Each Bottle</h2>
@@ -147,7 +166,7 @@
     </section>
 
     <section class="scene" id="walk" data-theme="day" aria-labelledby="walkTitle" hidden>
-      <div class="scene-count">06 &nbsp;·&nbsp; Beach walk</div>
+      <div class="scene-count">05 &nbsp;·&nbsp; Beach walk</div>
       <header class="scene-header compact">
         <p class="eyebrow">Beach walk</p>
         <h2 id="walkTitle">Little Things That Remind Me of You</h2>
@@ -168,13 +187,13 @@
     </section>
 
     <section class="scene" id="golden" data-theme="sunset" aria-labelledby="goldenTitle" hidden>
-      <div class="scene-count">07 &nbsp;·&nbsp; Golden hour</div>
+      <div class="scene-count">06 &nbsp;·&nbsp; Golden hour</div>
       <header class="scene-header">
         <p class="eyebrow">As the light turns gold</p>
         <h2 id="goldenTitle">Before This Day Ends</h2>
       </header>
       <div class="wishes">
-        <p>Thank you for always making time for me.</p>
+        <p>Somehow, talking to you always feels like coming home.</p>
         <p>Never stop believing in yourself.</p>
         <p>Keep smiling—even on the difficult days.</p>
         <p>You're becoming someone many people will look up to.</p>
@@ -185,7 +204,7 @@
     </section>
 
     <section class="scene" id="night" data-theme="night" aria-labelledby="nightTitle" hidden>
-      <div class="scene-count">08 &nbsp;·&nbsp; Night</div>
+      <div class="scene-count">07 &nbsp;·&nbsp; Night</div>
       <div class="night-copy">
         <p class="eyebrow">Our familiar tradition</p>
         <h2 id="nightTitle">Under The Same Moon</h2>
@@ -196,7 +215,7 @@
     </section>
 
     <section class="scene" id="cake" data-theme="night" aria-labelledby="cakeTitle" hidden>
-      <div class="scene-count">09 &nbsp;·&nbsp; A wish</div>
+      <div class="scene-count">08 &nbsp;·&nbsp; A wish</div>
       <header class="scene-header">
         <p class="eyebrow">Close your eyes</p>
         <h2 id="cakeTitle">Make A Birthday Wish</h2>
@@ -208,7 +227,7 @@
         <div class="cake-icing"></div><div class="cake-layer"></div><div class="cake-plate"></div>
       </div>
       <p class="wish-hint">Some wishes are too beautiful to say out loud.</p>
-      <button class="glass-button primary" id="blowCandles" type="button">Blow out the candles</button>
+      <button class="glass-button primary" id="blowCandles" type="button">Make a wish</button>
     </section>
 
     <section class="scene finale" id="finale" data-theme="night" aria-labelledby="finaleTitle" hidden>
@@ -216,18 +235,17 @@
       <div class="final-content">
         <div class="final-photo-wrap">
           <img src="assets/photos/final.jpg" alt="Aelius and Marniè together" loading="lazy">
-          <span>Together, under the same sky</span>
+          <span>Felt incomplete without this 💖</span>
         </div>
         <div class="final-message">
           <p class="eyebrow">10 &nbsp;·&nbsp; For Marniè</p>
           <h2 id="finaleTitle">Happy Birthday</h2>
           <div id="finalLines">
             <p>Thank you for being such an amazing person.</p>
-            <p>Thank you for every conversation.</p>
-            <p>Thank you for every moon picture.</p>
-            <p>Thank you for being part of my routine.</p>
-            <p>Some traditions are worth keeping.</p>
-            <p>Ours is sending each other the moon. <span>🌙</span></p>
+            <p> for every conversation.</p>
+            <p> for every moon picture.</p>
+            <p> for being part of my routine.</p>
+            <p> Keep sending the moon pictures. <span>🌙</span></p>
             <p class="final-words">See you under the next beautiful moon.</p>
             <p class="signature">— Aelius</p>
           </div>

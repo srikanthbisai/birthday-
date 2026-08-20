@@ -4,7 +4,7 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const world = $("#world");
 const scenes = $$(".scene");
-const sceneOrder = ["arrival", "letter", "memories", "timeline", "bottles", "walk", "golden", "night", "cake", "finale"];
+const sceneOrder = ["arrival", "timeline", "memories", "bottles", "walk", "golden", "night", "cake", "letter", "finale"];
 const progressBar = $("#progressBar");
 const music = $("#music");
 const waves = $("#waves");
@@ -21,7 +21,47 @@ window.addEventListener("load", () => {
   setTimeout(() => $("#loader").classList.add("done"), reduceMotion ? 50 : 2500);
   initializeArrival();
   startAudio();
+  updateStorm(true);
 });
+
+let lightningTimer;
+let rainBuilt = false;
+
+function buildRain() {
+  if (rainBuilt) return;
+  const rain = $("#rain");
+  if (!rain) return;
+  rainBuilt = true;
+  const count = reduceMotion ? 0 : Math.min(70, Math.floor(innerWidth / 14));
+  for (let i = 0; i < count; i += 1) {
+    const drop = document.createElement("i");
+    drop.className = "raindrop";
+    drop.style.left = `${Math.random() * 100}%`;
+    drop.style.height = `${10 + Math.random() * 16}px`;
+    drop.style.animationDuration = `${0.7 + Math.random() * 0.9}s`;
+    drop.style.animationDelay = `${-Math.random() * 2}s`;
+    drop.style.opacity = `${0.25 + Math.random() * 0.4}`;
+    rain.append(drop);
+  }
+}
+
+function updateStorm(active) {
+  clearTimeout(lightningTimer);
+  const bolt = $("#lightning");
+  if (!bolt) return;
+  bolt.classList.remove("flash");
+  if (!active || reduceMotion) return;
+  buildRain();
+
+  const flash = () => {
+    if (!world.classList.contains("storm")) return;
+    bolt.classList.remove("flash");
+    void bolt.offsetWidth;
+    bolt.classList.add("flash");
+    lightningTimer = setTimeout(flash, 2800 + Math.random() * 4200);
+  };
+  lightningTimer = setTimeout(flash, 1800);
+}
 
 ["pointerdown", "keydown", "touchstart"].forEach(eventName => {
   document.addEventListener(eventName, event => {
@@ -72,6 +112,7 @@ function showScene(id) {
     world.className = `world ${next.dataset.theme}`;
     $("#moon").tabIndex = id === "night" || id === "finale" ? 0 : -1;
     updateBackButton();
+    updateStorm(id === "arrival" || next.dataset.theme === "storm");
 
     if (id === "letter") typeLetter();
     if (id === "memories") startMemoryCarousel();
@@ -108,7 +149,7 @@ updateBackButton();
 $("#openBottle").addEventListener("click", () => {
   startAudio();
   $(".bottle-wrap").classList.add("opening");
-  sceneTimer = setTimeout(() => showScene("letter"), reduceMotion ? 0 : 850);
+  sceneTimer = setTimeout(() => showScene("timeline"), reduceMotion ? 0 : 850);
 });
 
 const cuteNoTexts = [
@@ -235,8 +276,8 @@ function startMemoryCarousel() {
     index = (index + 1) % cards.length;
     cards[index].classList.add("current");
 
-    setTimeout(() => previous.classList.remove("leaving-photo"), 1300);
-  }, 5000);
+    setTimeout(() => previous.classList.remove("leaving-photo"), 650);
+  }, 2500);
 }
 
 const bottleMessages = [
@@ -404,7 +445,7 @@ $("#blowCandles").addEventListener("click", event => {
   event.currentTarget.disabled = true;
   $(".cake").classList.add("blown");
   waves.volume = 0.04;
-  setTimeout(() => showScene("finale"), reduceMotion ? 100 : 2300);
+  setTimeout(() => showScene("letter"), reduceMotion ? 100 : 2300);
 });
 
 function markImageMissing(image) {
