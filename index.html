@@ -97,8 +97,8 @@
     <section class="scene" id="memories" data-theme="day" aria-labelledby="memoriesTitle" hidden>
       <div class="scene-count">03 &nbsp;·&nbsp; Memories</div>
       <header class="scene-header">
-        <p class="eyebrow">Memories in motion</p>
-        <h2 id="memoriesTitle">Three little moments <span>✨</span></h2>
+        <p class="eyebrow">Five moments worth keeping</p>
+        <h2 id="memoriesTitle">Memories in Motion <span>✨</span></h2>
       </header>
       <div class="polaroids">
         <figure class="polaroid">
@@ -113,12 +113,30 @@
           <div class="photo-shell"><img src="assets/photos/photo3.jpg" alt="Aelius and Marniè racing a scooter at night"><span>03</span></div>
           <figcaption>The little things I’d keep forever.</figcaption>
         </figure>
+        <figure class="polaroid">
+          <div class="photo-shell"><img src="assets/photos/photo4.jpg" alt="Walking and talking near Victoria General Hospital"><span>04</span></div>
+          <figcaption>Another night. Another conversation.</figcaption>
+        </figure>
+        <figure class="polaroid">
+          <div class="photo-shell"><img src="assets/photos/photo5.jpg" alt="Sharing Davidoff coffee dark chocolate by the beach"><span>05</span></div>
+          <figcaption>Small gifts. Soft evenings. Big memories.</figcaption>
+        </figure>
       </div>
-      <button class="glass-button next-button" data-next="bottles" type="button">Continue <span>→</span></button>
+      <button class="glass-button next-button" data-next="timeline" type="button">Continue <span>→</span></button>
+    </section>
+
+    <section class="scene" id="timeline" data-theme="day" aria-labelledby="timelineTitle" hidden>
+      <div class="scene-count">04 &nbsp;·&nbsp; Our little timeline</div>
+      <header class="scene-header">
+        <p class="eyebrow">Our little timeline</p>
+        <h2 id="timelineTitle">How we got here</h2>
+      </header>
+      <div class="reveal-stack" id="timelineStack" aria-live="polite"></div>
+      <button class="glass-button next-button" data-next="bottles" type="button" disabled>Continue <span>→</span></button>
     </section>
 
     <section class="scene" id="bottles" data-theme="day" aria-labelledby="bottlesTitle" hidden>
-      <div class="scene-count">04 &nbsp;·&nbsp; Messages in bottles</div>
+      <div class="scene-count">05 &nbsp;·&nbsp; Messages in bottles</div>
       <header class="scene-header">
         <p class="eyebrow">Messages in bottles</p>
         <h2 id="bottlesTitle">Click Each Bottle</h2>
@@ -129,7 +147,7 @@
     </section>
 
     <section class="scene" id="walk" data-theme="day" aria-labelledby="walkTitle" hidden>
-      <div class="scene-count">05 &nbsp;·&nbsp; Beach walk</div>
+      <div class="scene-count">06 &nbsp;·&nbsp; Beach walk</div>
       <header class="scene-header compact">
         <p class="eyebrow">Beach walk</p>
         <h2 id="walkTitle">Little Things That Remind Me of You</h2>
@@ -137,12 +155,12 @@
         <p class="tap-instruction">Tap each icon to uncover what it's hiding.</p>
       </header>
       <div class="treasure-beach" id="treasureBeach">
-        <button class="treasure shell" type="button" data-message="Thank you for always making time for me." aria-label="Shell">◒</button>
-        <button class="treasure starfish" type="button" data-message="You're genuinely one of my favorite people." aria-label="Starfish">★</button>
+        <button class="treasure shell" type="button" data-message="Thank you for always making time for me." aria-label="Shell">🐚</button>
+        <button class="treasure starfish" type="button" data-message="You're genuinely one of my favorite people." aria-label="Starfish">⭐</button>
         <button class="treasure crab" type="button" data-message="Even this crab thinks you're awesome." aria-label="Crab">🦀</button>
-        <button class="treasure tiny-bottle" type="button" data-message="I'm proud of how far you've come." aria-label="Bottle">♧</button>
-        <button class="treasure coconut" type="button" data-message="I hope this year brings you countless reasons to smile." aria-label="Coconut">●</button>
-        <button class="treasure stethoscope" type="button" data-message="Keep becoming the amazing doctor you're meant to be." aria-label="Stethoscope">♧</button>
+        <button class="treasure tiny-bottle" type="button" data-message="I'm proud of how far you've come." aria-label="Bottle">🍾</button>
+        <button class="treasure coconut" type="button" data-message="I hope this year brings you countless reasons to smile." aria-label="Coconut">🥥</button>
+        <button class="treasure stethoscope" type="button" data-message="Keep becoming the amazing doctor you're meant to be." aria-label="Stethoscope">🩺</button>
         <div class="discovery" id="discovery" role="status"></div>
       </div>
       <div class="found"><span id="foundCount">0</span> of 6 thoughts found</div>
@@ -150,7 +168,7 @@
     </section>
 
     <section class="scene" id="golden" data-theme="sunset" aria-labelledby="goldenTitle" hidden>
-      <div class="scene-count">06 &nbsp;·&nbsp; Golden hour</div>
+      <div class="scene-count">07 &nbsp;·&nbsp; Golden hour</div>
       <header class="scene-header">
         <p class="eyebrow">As the light turns gold</p>
         <h2 id="goldenTitle">Before This Day Ends</h2>
@@ -167,7 +185,7 @@
     </section>
 
     <section class="scene" id="night" data-theme="night" aria-labelledby="nightTitle" hidden>
-      <div class="scene-count">07 &nbsp;·&nbsp; Night</div>
+      <div class="scene-count">08 &nbsp;·&nbsp; Night</div>
       <div class="night-copy">
         <p class="eyebrow">Our familiar tradition</p>
         <h2 id="nightTitle">Under The Same Moon</h2>
@@ -178,7 +196,7 @@
     </section>
 
     <section class="scene" id="cake" data-theme="night" aria-labelledby="cakeTitle" hidden>
-      <div class="scene-count">08 &nbsp;·&nbsp; A wish</div>
+      <div class="scene-count">09 &nbsp;·&nbsp; A wish</div>
       <header class="scene-header">
         <p class="eyebrow">Close your eyes</p>
         <h2 id="cakeTitle">Make A Birthday Wish</h2>
@@ -201,7 +219,7 @@
           <span>Together, under the same sky</span>
         </div>
         <div class="final-message">
-          <p class="eyebrow">09 &nbsp;·&nbsp; For Marniè</p>
+          <p class="eyebrow">10 &nbsp;·&nbsp; For Marniè</p>
           <h2 id="finaleTitle">Happy Birthday</h2>
           <div id="finalLines">
             <p>Thank you for being such an amazing person.</p>

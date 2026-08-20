@@ -4,7 +4,7 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const world = $("#world");
 const scenes = $$(".scene");
-const sceneOrder = ["arrival", "letter", "memories", "bottles", "walk", "golden", "night", "cake", "finale"];
+const sceneOrder = ["arrival", "letter", "memories", "timeline", "bottles", "walk", "golden", "night", "cake", "finale"];
 const progressBar = $("#progressBar");
 const music = $("#music");
 const waves = $("#waves");
@@ -75,12 +75,14 @@ function showScene(id) {
 
     if (id === "letter") typeLetter();
     if (id === "memories") startMemoryCarousel();
+    if (id === "timeline") startTimeline();
     if (id === "bottles") initBottles();
     if (id === "golden") revealWishes();
     if (id === "night") startShootingStars();
     if (id === "cake") resetCake();
     if (id === "finale") startFinale();
     if (id !== "memories") clearInterval(memoryTimer);
+    if (id !== "timeline") clearTimeout(timelineTimer);
     if (id !== "night" && id !== "finale") clearInterval(shootingStarTimer);
   }, reduceMotion ? 0 : 700);
 }
@@ -238,8 +240,9 @@ function startMemoryCarousel() {
 }
 
 const bottleMessages = [
-  "Thank you for always making time for me.",
-  "You're genuinely one of my favorite people.",
+  "You know I still think Marniè is one of the prettiest names I've ever heard. And somehow it suits you annoyingly well.",
+  "Somewhere along the way, sending you a stupid reel became part of my daily routine. I don't think I ever consciously decided that.",
+  "I still remember the little things you probably forgot.",
   "I'm proud of how far you've come.",
   "Keep becoming the amazing doctor you're meant to be."
 ];
@@ -262,6 +265,49 @@ function initBottles() {
     });
     row.append(button);
   });
+}
+
+const timelineLines = [
+  "We met.",
+  "One conversation became many.",
+  "Somehow, you became part of my everyday routine.",
+  "We had some crazy moments.",
+  "And today…",
+  "It's your birthday."
+];
+
+let timelineTimer;
+let timelineStarted = false;
+
+function startTimeline() {
+  const stack = $("#timelineStack");
+  const next = $("#timeline .next-button");
+  if (!stack) return;
+
+  if (timelineStarted) {
+    next.disabled = false;
+    return;
+  }
+
+  timelineStarted = true;
+  stack.innerHTML = "";
+  next.disabled = true;
+
+  let index = 0;
+  const showNext = () => {
+    if (index >= timelineLines.length) {
+      next.disabled = false;
+      return;
+    }
+    const line = document.createElement("p");
+    line.className = "reveal-line";
+    line.textContent = timelineLines[index];
+    stack.append(line);
+    requestAnimationFrame(() => line.classList.add("in"));
+    index += 1;
+    timelineTimer = setTimeout(showNext, reduceMotion ? 0 : 1200);
+  };
+  showNext();
 }
 
 let foundCount = 0;

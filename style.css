@@ -246,20 +246,67 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--stars); outline
 .polaroid figcaption { flex: 0 0 auto; min-height: 0; padding: .65rem .35rem 0; font: italic 1.05rem/1.25 var(--serif); }
 
 #walk { gap: .7rem; }
-.treasure-beach { position: relative; width: min(950px, 94vw); height: min(38vh, 320px); border-radius: 50% 50% 18% 18% / 12% 12% 5% 5%; background: linear-gradient(rgba(247,217,160,.12), rgba(206,169,105,.3)), repeating-radial-gradient(ellipse at 15% 30%, rgba(104,75,42,.13) 0 1px, transparent 1px 14px); box-shadow: inset 0 10px 25px rgba(255,255,255,.08); }
-.treasure { position: absolute; display: grid; place-items: center; width: 42px; aspect-ratio: 1; padding: 0; border: 0; background: transparent; color: #f7e3bc; filter: drop-shadow(0 3px 3px rgba(74,51,24,.24)); cursor: pointer; font-size: 2rem; animation: treasureGlow 2.6s ease-in-out infinite; transition: .3s; }
-.treasure:hover { transform: scale(1.2) rotate(8deg); }
-.treasure.found { opacity: .4; filter: none; animation: none; }
-@keyframes treasureGlow { 50% { filter: drop-shadow(0 0 8px rgba(255,249,196,.9)); transform: translateY(-4px); } }
-.shell { left: 8%; top: 52%; rotate: -20deg; }
-.starfish { left: 30%; top: 25%; color: #d98d68; }
+.treasure-beach {
+  position: relative; width: min(950px, 94vw); height: min(38vh, 320px);
+  border-radius: 50% 50% 18% 18% / 12% 12% 5% 5%;
+  background:
+    linear-gradient(180deg, rgba(255,245,214,.55), rgba(214,176,110,.92)),
+    repeating-radial-gradient(ellipse at 15% 30%, rgba(104,75,42,.18) 0 1px, transparent 1px 14px);
+  border: 1px solid rgba(255,255,255,.35);
+  box-shadow: inset 0 10px 25px rgba(255,255,255,.18), 0 12px 30px rgba(40,28,12,.18);
+}
+.treasure {
+  position: absolute; display: grid; place-items: center; width: 52px; aspect-ratio: 1; padding: 0;
+  border: 1px solid rgba(255,255,255,.55); border-radius: 14px;
+  background: rgba(255,255,255,.82); color: #3a2b22;
+  box-shadow: 0 6px 16px rgba(74,51,24,.22);
+  filter: drop-shadow(0 3px 3px rgba(74,51,24,.18));
+  cursor: pointer; font-size: 1.85rem;
+  animation: treasureGlow 2.6s ease-in-out infinite; transition: .3s;
+}
+.treasure:hover { transform: scale(1.15) rotate(8deg); background: #fff; }
+.treasure.found { opacity: .55; filter: none; animation: none; background: rgba(255,248,231,.7); }
+@keyframes treasureGlow {
+  50% { box-shadow: 0 0 0 4px rgba(255,249,196,.45), 0 8px 18px rgba(74,51,24,.22); transform: translateY(-4px); }
+}
+.shell { left: 8%; top: 52%; }
+.starfish { left: 30%; top: 25%; }
 .crab { left: 77%; top: 58%; }
-.tiny-bottle { left: 52%; top: 64%; rotate: 24deg; color: #bce2d0; }
-.coconut { left: 67%; top: 12%; color: #7e5433; }
-.stethoscope { left: 90%; top: 24%; rotate: 145deg; color: #dcecf0; }
-.discovery { position: absolute; z-index: 5; left: 50%; bottom: 5%; width: min(440px, 90%); padding: .8rem 1rem; border: 1px solid rgba(255,255,255,.3); border-radius: 10px; opacity: 0; transform: translate(-50%,8px); background: rgba(255,255,255,.7); box-shadow: 0 10px 30px rgba(80,58,28,.15); color: #4a3b2c; font: italic 1.08rem var(--serif); transition: .4s; }
+.tiny-bottle { left: 52%; top: 64%; }
+.coconut { left: 67%; top: 12%; }
+.stethoscope { left: 88%; top: 24%; }
+.discovery {
+  position: absolute; z-index: 5; left: 50%; bottom: 5%; width: min(440px, 90%);
+  padding: .8rem 1rem; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; opacity: 0;
+  transform: translate(-50%,8px); background: rgba(255,248,234,.95);
+  box-shadow: 0 10px 30px rgba(80,58,28,.2); color: #3a2b22;
+  font: italic 1.08rem var(--serif); transition: .4s;
+}
 .discovery.show { opacity: 1; transform: translate(-50%,0); }
-.found { font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; }
+.found {
+  color: #fff; font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+#walk .scene-header > p,
+#walk .tap-instruction {
+  color: rgba(255,255,255,.95);
+  text-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+
+.reveal-stack {
+  display: flex; flex-direction: column; align-items: center; gap: .15rem;
+  width: min(640px, 92vw); margin: .4rem 0 0; text-align: center;
+}
+.reveal-line {
+  margin: 0; max-width: 28em; opacity: 0; transform: translateY(10px);
+  color: #fff; font: 500 clamp(1.1rem, 3.4vw, 1.55rem)/1.35 var(--serif);
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal-line.in { opacity: 1; transform: none; }
+.reveal-line:not(:last-child)::after {
+  content: "↓"; display: block; margin: .35em 0 .1em; opacity: .45; font-size: .85em;
+}
 .footprint { position: absolute; width: 7px; height: 13px; border-radius: 50%; opacity: .32; background: #8e6c45; pointer-events: none; animation: footprint 1.8s ease forwards; }
 @keyframes footprint { to { opacity: 0; } }
 

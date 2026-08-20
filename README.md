@@ -12,6 +12,8 @@ assets/
     photo1.jpg
     photo2.jpg
     photo3.jpg
+    photo4.jpg
+    photo5.jpg
     final.jpg
   music/
     jhol.mp3
